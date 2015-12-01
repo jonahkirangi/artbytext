@@ -1,0 +1,16 @@
+{
+  "name": "ArtByText",
+  "version": "1.0.0",
+  "description": "Art By Text",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonah Kirangi",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "twilio": "^2.5.2"
+  }
+}
