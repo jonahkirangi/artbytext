@@ -14,25 +14,28 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 app.post('/', function(req, res) {
-  // console.log(req.body);
+  var success;
 
   // Twilio configuration
   twilio.messages.create({
     from: config.twilioNumber,
     to: req.body.receivedNum,
     body: req.body.randomArt
-  }, function(err, responseData) {
-      if(!err) {
-        console.log('To: ' + responseData.to);
-        console.log('Message: ' + responseData.body);
-        console.log('Sent On: ' + Date() + '\n');
+  }, function(err, message) {
+      if (err) {
+        console.error('Text failed because: ' + err.message);
+        var success = false;
       } else {
-        console.log('Error message: ' + err.message);
-        console.log('Error code: ' + err.code);
-        console.log('Sent On: ' + Date() + '\n');
+        console.log('Text sent! Message SID: ' + message.sid);
+        var success = true;
       }
   });
 
+  if (success) {
+    res.json({ success: true });
+  } else {
+    res.json({ success: false });
+  }
 });
 
 app.listen(3000, function() {

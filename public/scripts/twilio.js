@@ -30,7 +30,13 @@ $(document).ready(function () {
         contentType: 'application/json',
         url: '/',
         dataType: 'JSON',
-        data: JSON.stringify({receivedNum, randomArt})
+        data: JSON.stringify({receivedNum, randomArt}),
+        success: function (results) {
+          console.log(results);
+        },
+        error: function (results) {
+          console.log(results);
+        }
       });
     });
 
