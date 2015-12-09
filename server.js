@@ -1,24 +1,32 @@
-var path = require('path');
 var config = require('./config.js');
 var express = require('express');
+var exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var twilio = require('twilio')(config.accountSid, config.authToken);
 var csrf = require('csurf');
 
 var csrfProtection = csrf({ cookie: true });
-var staticPath = path.resolve(__dirname + '/public');
 
 var app = express();
 
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(express.static(staticPath));
+// Application middleware
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+// Application routing
+app.get('/', function (req, res) {
+  res.render('home');
+});
 
 app.post('/', csrfProtection, function(req, res) {
   // Pass the csrfToken to the view
-  res.render('index', { csrf: req.csrfToken() });
+  res.render('home', { csrf: req.csrfToken() });
 
   var success;
 
