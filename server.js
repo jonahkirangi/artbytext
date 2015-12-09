@@ -1,4 +1,3 @@
-var path = require('path');
 var config = require('./config.js');
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -7,9 +6,7 @@ var twilio = require('twilio')(config.accountSid, config.authToken);
 var app = express();
 
 // Application routing
-var staticPath = path.resolve(__dirname + '/public');
-app.use(express.static(staticPath));
-
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
