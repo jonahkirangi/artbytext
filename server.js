@@ -1,14 +1,22 @@
 var config = require('./config.js');
 var express = require('express');
+var exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser');
 var twilio = require('twilio')(config.accountSid, config.authToken);
 
 var app = express();
 
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
 // Application routing
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
+
+app.get('/', function (req, res) {
+  res.render('home');
+});
 
 app.post('/', function(req, res) {
   var success;
