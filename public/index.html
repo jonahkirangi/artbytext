@@ -47,6 +47,7 @@
       <div class="headline">ASCII Art Sent By Text</div>
       <div class="phoneNumberForm">
         <form id="getNumberForm">
+          <input type="hidden" name="_csrf" value="{{csrf}}">
           <input type="text" id="userNumber" name="userNumber" pattern="\d*" autocomplete="off" placeholder="Enter your cell number">
           <br>
           <button type="submit" id="submissionButton">Submit</button>

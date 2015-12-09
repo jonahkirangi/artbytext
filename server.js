@@ -2,18 +2,24 @@ var path = require('path');
 var config = require('./config.js');
 var express = require('express');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var twilio = require('twilio')(config.accountSid, config.authToken);
+var csrf = require('csurf');
+
+var csrfProtection = csrf({ cookie: true });
+var staticPath = path.resolve(__dirname + '/public');
 
 var app = express();
 
-// Application routing
-var staticPath = path.resolve(__dirname + '/public');
-app.use(express.static(staticPath));
-
-app.use(bodyParser.urlencoded());
+app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(express.static(staticPath));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/', function(req, res) {
+app.post('/', csrfProtection, function(req, res) {
+  // Pass the csrfToken to the view
+  res.render('index', { csrf: req.csrfToken() });
+
   var success;
 
   // Twilio configuration
