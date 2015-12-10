@@ -16,6 +16,8 @@ $(document).ready(function () {
     }
   });
 
+  var _csrf = $('meta[name="_csrf"]').attr('content');
+
   $('#getNumberForm').submit(function () {
     var receivedNum = $('#userNumber').val();
     console.log(receivedNum);
@@ -30,12 +32,12 @@ $(document).ready(function () {
         contentType: 'application/json',
         url: '/',
         dataType: 'JSON',
-        data: JSON.stringify({receivedNum, randomArt}),
-        success: function (results) {
-          console.log(results);
+        data: JSON.stringify({_csrf, receivedNum, randomArt}),
+        success: function (result) {
+          console.log(result.success);
         },
-        error: function (results) {
-          console.log(results);
+        error: function (result) {
+          console.log(result.error);
         }
       });
     });

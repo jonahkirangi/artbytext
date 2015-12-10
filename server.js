@@ -20,15 +20,12 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 // Application routing
-app.get('/', function (req, res) {
-  res.render('home');
+app.get('/', csrfProtection, function (req, res) {
+  // Pass the csrfToken to the view
+  res.render('home', { csrfToken: req.csrfToken() });
 });
 
-app.post('/', csrfProtection, function(req, res) {
-  // Pass the csrfToken to the view
-  res.render('home', { csrf: req.csrfToken() });
-
-  var success;
+app.post('/', csrfProtection, function (req, res) {
 
   // Twilio configuration
   twilio.messages.create({
@@ -37,19 +34,14 @@ app.post('/', csrfProtection, function(req, res) {
     body: req.body.randomArt
   }, function(err, message) {
       if (err) {
-        console.error('Text failed because: ' + err.message);
-        var success = false;
+        console.log('Text failed because: ' + err.message);
+        res.end('{"error" : "Post to server failed"}');
       } else {
         console.log('Text sent! Message SID: ' + message.sid);
-        var success = true;
+        res.end('{"success" : "Post to server successful"}');
       }
   });
 
-  if (success) {
-    res.json({ success: true });
-  } else {
-    res.json({ success: false });
-  }
 });
 
 app.listen(3000, function() {
