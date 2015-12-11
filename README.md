@@ -14,7 +14,7 @@ You will need the following things properly installed on your computer.
 * `git clone https://github.com/jonahkirangi/artbytext.git`
 * `cd` into the new directory
 * `npm install`
-* add your Twilio credentials to `config.js`
+* change `config.sample.js` to `config.js` and add your Twilio credentials
 
 ## Running / Development
 
