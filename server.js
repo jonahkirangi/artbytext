@@ -37,10 +37,10 @@ app.post('/', csrfProtection, function (req, res) {
   }, function(err, message) {
       if (err) {
         console.log('Text failed because: ' + err.message);
-        res.send('{"message" : "Post to server failed", "status" : "500"}');
+        res.send({"message" : "Message failed"});
       } else {
         console.log('Text sent! Message SID: ' + message.sid);
-        res.send('{"message" : "Post to server successful", "status" : "200"}');
+        res.send({"message" : "Message sent", "status" : 200});
       }
   });
 
