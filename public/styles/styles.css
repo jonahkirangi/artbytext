@@ -56,6 +56,10 @@ body {
   padding-top: 100px;
 }
 
+#getNumberForm {
+  position: relative;
+}
+
 .phoneNumberForm {
   width: 75%;
   margin: 0 auto;
@@ -101,6 +105,25 @@ body {
 
 #submissionButton:hover {
   background-color: #4b223f;
+}
+
+.formSuccess,
+.formFail {
+  display: none;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+  font-size: 38px;
+  position: absolute;
+  background-color: #eee7ec;
+  top: 0;
+  z-index: 5;
+}
+
+.messageStatus {
+  display: inline-block;
+  margin-top: 35px;
 }
 
 .footer {
@@ -201,6 +224,11 @@ body {
     width: 90%;
   }
 
+  .formSuccess,
+  .formFail {
+    font-size: 32px;
+  }
+
   #userNumber {
     height: 65px;
     font-size: 28px;
@@ -230,6 +258,11 @@ body {
 @media only screen and (max-width : 320px) {
   .social {
     display: none;
+  }
+
+  .formSuccess,
+  .formFail {
+    font-size: 28px;
   }
 
   #dancers {

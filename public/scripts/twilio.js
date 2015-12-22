@@ -34,10 +34,14 @@ $(document).ready(function () {
         dataType: 'JSON',
         data: JSON.stringify({_csrf, receivedNum, randomArt}),
         success: function (result) {
-          console.log(result.success);
+          if (result.status == 200) {
+            $('.formSuccess').fadeIn(3000).delay(2000).fadeOut(3000);
+          } else {
+            $('.formFail').fadeIn(3000).delay(2000).fadeOut(3000);
+          }
         },
         error: function (result) {
-          console.log(result.error);
+          $('.formFail').fadeIn(3000).delay(2000).fadeOut(3000);
         }
       });
     });
