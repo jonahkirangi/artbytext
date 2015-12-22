@@ -45,10 +45,6 @@ body {
   position: relative;
 }
 
-.mainContent {
-  /*margin-top: 200px;*/
-}
-
 .headline {
   font-size: 42px;
   text-align: center;
@@ -57,17 +53,14 @@ body {
 }
 
 #getNumberForm {
-  position: relative;
+  padding: 1px;
 }
 
 .phoneNumberForm {
   width: 75%;
   margin: 0 auto;
   padding-top: 80px;
-}
-
-.description {
-  /*margin: 0 auto;*/
+  position: relative;
 }
 
 .description p {
@@ -117,18 +110,17 @@ body {
   font-size: 38px;
   position: absolute;
   background-color: #eee7ec;
-  top: 0;
+  top: 0px;
   z-index: 5;
 }
 
 .messageStatus {
   display: inline-block;
-  margin-top: 35px;
+  margin-top: 110px;
 }
 
 .footer {
   position: relative;
-  /*bottom: 0;*/
   width: 100%;
   height: 50px;
 }
@@ -229,6 +221,10 @@ body {
     font-size: 32px;
   }
 
+  .messageStatus {
+    margin-top: 65px;
+  }
+
   #userNumber {
     height: 65px;
     font-size: 28px;
@@ -263,6 +259,10 @@ body {
   .formSuccess,
   .formFail {
     font-size: 28px;
+  }
+
+  .messageStatus {
+    margin-top: 65px;
   }
 
   #dancers {
