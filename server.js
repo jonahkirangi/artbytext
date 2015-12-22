@@ -1,6 +1,7 @@
 var config = require('./config.js');
 var express = require('express');
 var exphbs  = require('express-handlebars');
+var morgan       = require('morgan');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var twilio = require('twilio')(config.accountSid, config.authToken);
@@ -15,6 +16,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(morgan('dev'));
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -35,10 +37,10 @@ app.post('/', csrfProtection, function (req, res) {
   }, function(err, message) {
       if (err) {
         console.log('Text failed because: ' + err.message);
-        res.end('{"error" : "Post to server failed"}');
+        res.send('{"message" : "Post to server failed", "status" : "500"}');
       } else {
         console.log('Text sent! Message SID: ' + message.sid);
-        res.end('{"success" : "Post to server successful"}');
+        res.send('{"message" : "Post to server successful", "status" : "200"}');
       }
   });
 
