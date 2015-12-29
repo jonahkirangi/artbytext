@@ -131,6 +131,16 @@ body {
   text-align: center;
 }
 
+.footerTitle a:link,
+.footerTitle a:visited {
+  text-decoration: none;
+  color: #5e2b4f;
+}
+
+.footerTitle a:hover {
+  text-decoration: underline;
+}
+
 .author {
   position: fixed;
   bottom: 0;

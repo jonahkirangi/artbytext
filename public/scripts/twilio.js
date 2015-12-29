@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  var _csrf = $('meta[name="_csrf"]').attr('content');
+
   $('#userNumber').keydown(function (e) {
     // Allow: backspace, delete, tab, escape, enter and .
     if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
@@ -15,8 +17,6 @@ $(document).ready(function () {
       e.preventDefault();
     }
   });
-
-  var _csrf = $('meta[name="_csrf"]').attr('content');
 
   $('#getNumberForm').submit(function () {
     var receivedNum = $('#userNumber').val();
